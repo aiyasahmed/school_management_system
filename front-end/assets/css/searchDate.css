@@ -1,0 +1,46 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align items to the right */
+  margin-top: -55px;
+}
+
+.btn-open-popup {
+  margin-top: 0;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+input.startDate,
+input.endDate {
+  padding: 10px 12px;
+  margin-right: 10px;
+  background-color: #fff;
+  color: #333;
+  border: 2px solid green;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.search-btn,
+button.reset-btn,
+button.clear-btn {
+  padding: 12px 24px;
+  margin-right: 10px;
+  font-size: 18px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

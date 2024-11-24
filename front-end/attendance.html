@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>School management system</title>
+
+    <link rel="stylesheet" href="assets/css/index.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/table.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/attendance_popup.css" />
+    <link rel="stylesheet" href="assets/css/toggleSwitch.css" />
+    <link rel="stylesheet" href="assets/css/searchDate.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="attendance.html">Attendances</a>
+      <a href="students.html">Students</a>
+      <a href="teachers.html">Teachers</a>
+      <a href="subjects.html">Subjects</a>
+      <a href="classes.html">Classes</a>
+    </div>
+
+    <main-component
+      id="attendance"
+      title="Attendances"
+      data="[]"
+      key="2"
+    ></main-component>
+
+    <div id="popupOverlay" class="overlay-container">
+      <div class="popup-box">
+        <h2 style="color: green">Record Attendance</h2>
+        <div id="popupContent"></div>
+        <button class="btn-close-popup" onclick="togglePopup()">Close</button>
+      </div>
+    </div>
+
+    <h1></h1>
+
+    <script src="assets/js/filter.js"></script>
+    <script src="assets/js/table.js"></script>
+    <script src="pages/components/TableComponent.js"></script>
+    <script src="pages/components/MainComponent.js"></script>
+    <script src="assets/js/attendance_popup.js"></script>
+  </body>
+</html>

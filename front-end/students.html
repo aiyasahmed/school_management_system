@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>School management system</title>
+
+    <link rel="stylesheet" href="assets/css/index.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/table.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/toggleSwitch.css" />
+    <link rel="stylesheet" href="assets/css/searchDate.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="attendance.html">Attendances</a>
+      <a href="students.html">Students</a>
+      <a href="teachers.html">Teachers</a>
+      <a href="subjects.html">Subjects</a>
+      <a href="classes.html">Classes</a>
+    </div>
+
+    <!-- student content -->
+    <main-component
+      id="student"
+      title="Students"
+      data="[]"
+      key="3"
+    ></main-component>
+    <!-- end student content -->
+
+    <script src="assets/js/filter.js"></script>
+    <script src="assets/js/table.js"></script>
+    <script src="pages/components/TableComponent.js"></script>
+    <script src="pages/components/MainComponent.js"></script>
+  </body>
+</html>
