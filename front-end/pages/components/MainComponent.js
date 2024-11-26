@@ -71,7 +71,7 @@ class MainComponent extends HTMLElement {
       this.tableKey
     }"></table-component>
         </div>
-        <div id="pagination"></div> <!-- Add pagination container -->
+        <div id="pagination" class="pagination-container pagination"></div> <!-- Add pagination container -->
       </div>
     `;
 
