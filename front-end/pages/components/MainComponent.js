@@ -4,6 +4,7 @@ class MainComponent extends HTMLElement {
     this.title = this.getAttribute("title");
     this.tableKey = this.getAttribute("key");
     this.data = [];
+    this.itemsPerPage = 8;
   }
 
   connectedCallback() {
@@ -17,7 +18,6 @@ class MainComponent extends HTMLElement {
     }
   }
 
-  // Function for Fetching Attendance
   async fetchAttendance() {
     try {
       const response = await axios.get("http://localhost:3001/get-attendance");
@@ -28,7 +28,6 @@ class MainComponent extends HTMLElement {
     }
   }
 
-  // Function for Fetching Student Data
   async fetchStudentData() {
     try {
       const response = await axios.get("http://localhost:3001/get-students");
@@ -39,35 +38,32 @@ class MainComponent extends HTMLElement {
     }
   }
 
-  // Rendering HTML elements according to title
   render() {
     this.innerHTML = `
       <div class="content">
         <h2>${this.title}</h2>
         ${
           this.title === "Attendances"
-            ? `
-        <div class="filter-container">
-          <button class="btn-open-popup" onclick="togglePopup()">Record Attendance</button>
-          <button id="clear-btn-attendance" class="clear-btn">Clear</button>
-          <input id="start-date-attendance" type="date" class="startDate" placeholder="Start Date">
-          <input id="end-date-attendance" type="date" class="endDate" placeholder="End Date">
-          <button id="search-btn-attendance" class="search-btn">Search</button>
-        </div>
-        `
+            ? `<div class="filter-container">
+                 <button class="btn-open-popup" onclick="togglePopup()">Record Attendance</button>
+                 <button id="clear-btn-attendance" class="clear-btn">Clear</button>
+                 <input id="start-date-attendance" type="date" class="startDate" placeholder="Start Date">
+                 <input id="end-date-attendance" type="date" class="endDate" placeholder="End Date">
+                 <button id="search-btn-attendance" class="search-btn">Search</button>
+               </div>`
             : ""
         }
         ${
           this.title === "Students"
-            ? `
-        <div class="filter-container">
-          <a href="student_registration_form.html"><button id="register-btn-students" class="search-btn">Register</button><a/>
-          <button id="clear-btn-students" class="clear-btn">Clear</button>
-          <input id="start-date-students" type="date" class="startDate" placeholder="Start Date">
-          <input id="end-date-students" type="date" class="endDate" placeholder="End Date">
-          <button id="search-btn-students" class="search-btn">Search</button>
-        </div>
-        `
+            ? `<div class="filter-container">
+                 <a href="student_registration_form.html">
+                   <button id="register-btn-students" class="search-btn">Register</button>
+                 </a>
+                 <button id="clear-btn-students" class="clear-btn">Clear</button>
+                 <input id="start-date-students" type="date" class="startDate" placeholder="Start Date">
+                 <input id="end-date-students" type="date" class="endDate" placeholder="End Date">
+                 <button id="search-btn-students" class="search-btn">Search</button>
+               </div>`
             : ""
         }
         <div id="table-component-div">
@@ -75,18 +71,30 @@ class MainComponent extends HTMLElement {
       this.tableKey
     }"></table-component>
         </div>
+        <div id="pagination"></div> <!-- Add pagination container -->
       </div>
     `;
 
-    // Set up event listeners after rendering
     if (this.title === "Attendances") {
       this.listenToEventsAttendance();
     } else if (this.title === "Students") {
       this.listenToEventsStudents();
     }
+
+    this.setupPagination();
   }
 
-  // Event listener to search attendance by date
+  setupPagination() {
+    paginate(this.data, this.itemsPerPage, "#pagination", (paginatedData) => {
+      const tableComponentDiv = this.querySelector("#table-component-div");
+      tableComponentDiv.innerHTML = `
+        <table-component data='${JSON.stringify(paginatedData)}' key="${
+        this.tableKey
+      }"></table-component>
+      `;
+    });
+  }
+
   listenToEventsAttendance() {
     const searchBtnAttendance = document.getElementById(
       "search-btn-attendance"
@@ -105,7 +113,6 @@ class MainComponent extends HTMLElement {
     }
   }
 
-  // Event listener to search student data by date
   listenToEventsStudents() {
     const searchBtnStudents = document.getElementById("search-btn-students");
     const clearBtnStudents = document.getElementById("clear-btn-students");
